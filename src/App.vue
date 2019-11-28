@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-if="dico">
+  <div id="app">
     <heading/>
     <div class="steps">
       <steps/>

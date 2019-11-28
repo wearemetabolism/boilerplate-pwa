@@ -1,0 +1,100 @@
+// Reset
+
+$reset-layout : true;
+
+
+// Data attributes
+
+$data-attributes : animation, display, icon, sizer, transition, grid;
+
+
+// Animations
+
+$include-animations : true;
+
+
+// Paths
+
+$public-path : '../';
+
+
+// Unsupported Browser List
+
+$unsupported-browsers : ie7, ie8, safari4;
+
+
+// Transition
+
+$transition-duration : 0.3s;
+
+
+// Animations
+
+$animation-duration   : 0.4s;
+$animation-offset     : 50%;
+$animation-offset-rem : 4rem;
+$animation-delay      : $animation-duration/20;
+
+//width
+$sidebar-w: 7rem;
+$sidebar-h: 50px;
+$space: 7rem;
+$space-m: 3.5rem;
+$footer-h: 35rem;
+$footer-hm: 25rem;
+$max-w: 80rem;
+
+
+// Sizes
+
+$lh-s : 1.2em;
+$lh-m : 1.4em;
+$lh-l : 1.6em;
+
+$ls-s : 0.05em;
+$ls-m : 0.1em;
+$ls-l : 0.2em;
+
+$fz-hero: 8rem;
+$fz-title: 4rem;
+$fz-subtitle: 3rem;
+$fz-quote: 5rem;
+$fz-text: 14px;
+$fz-link: 2rem;
+$fz-mention: 11px;
+
+
+//Colors
+$c-main : rgba(0,0,0,0.9);
+$c-primary : #C7DADD;
+$c-secondary: #7c7c7c;
+$c-subtle: #b2b2b2;
+$c-background: #e2e2e2;
+$c-darken: rgba(0,0,0,0.2);
+
+$box-shadow: 0 0 15px 0 rgba(0,0,0,0.16);
+$vignetting: radial-gradient(circle, rgba(0,0,0,0.34637605042016806) 0%, rgba(0,0,0,0.5480567226890756) 100%);
+
+
+
+// Selector
+$inputs :
+'input[type="text"], input[type="tel"], input[type="email"], input[type="password"],'+
+'input[type="number"], input[type="url"], input[type="search"], textarea';
+
+
+@import "../node_modules/@metabolism/framework/scss/function/background";
+@import "../node_modules/@metabolism/framework/scss/function/path";
+@import "../node_modules/@metabolism/framework/scss/function/position";
+@import "../node_modules/@metabolism/framework/scss/function/str-replace";
+@import "../node_modules/@metabolism/framework/scss/function/transition";
+
+@import "../node_modules/@metabolism/framework/scss/mixin/aspect-ratio";
+@import "../node_modules/@metabolism/framework/scss/mixin/fonts";
+@import "../node_modules/@metabolism/framework/scss/mixin/misc";
+
+@import "../node_modules/@metabolism/framework/scss/variable/animation";
+@import "../node_modules/@metabolism/framework/scss/variable/easing";
+@import "../node_modules/@metabolism/framework/scss/variable/keyframes";
+@import "../node_modules/@metabolism/framework/scss/variable/media-queries";
+@import "../node_modules/@metabolism/framework/scss/variable/social-colors";
