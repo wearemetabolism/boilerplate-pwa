@@ -6,38 +6,85 @@ Vue.use(Vuex);
 
 const default_state = function(){
     return {
-        data:{
-            dico:{}
-        }
+        nav:{},
+        clients:{},
+        pages:{},
+        options:{}
     }
 };
 
-export default new Vuex.Store({
-    plugins: [
-        createPersistedState()
-    ],
+
+let store = new Vuex.Store({
     state: default_state(),
-    mutations: {
-        dico(state, payload){
-            state.data.dico = payload;
+    plugins: [
+        //createPersistedState()
+    ],
+    getters: {
+        nav: state => () =>{
+            return state.nav;
+        },
+        clients: state => () =>{
+            return state.clients;
+        },
+        options: state => () =>{
+            return state.options;
+        },
+        page: state => (path) =>{
+            return path in state.pages ? state.pages[path] : false;
         }
     },
-    getters: {
-        dico: state => () =>{
-            return state.data.dico;
+    mutations:{
+        nav(state, nav)
+        {
+            state.nav = nav;
+        },
+        clients(state, clients)
+        {
+            state.clients = clients;
+        },
+        options(state, options)
+        {
+            state.options = options;
+        },
+        page(state, data)
+        {
+            state.pages[data.path] = data.body;
         }
     },
     actions: {
-        loadConfig (context){
+        load (context, path){
 
             return new Promise((resolve, reject) => {
-                Vue.http.get('config')
-                    .then(response => {
-                        context.commit('dico', response.body);
-                        resolve(response.body)
+
+                let page = context.getters.page(path);
+
+                if( page ){
+                    resolve(page);
+                }
+                else{
+                    Vue.http.get(Vue.http.options.root+path).then(response => {
+                        context.commit('page', {path:path, body:response.body});
+                        resolve(response.body);
+                    }).catch(e => {
+                        reject(e);
                     })
-                    .catch(e => { reject(e) })
+                }
+            })
+        },
+        config (context){
+
+            return new Promise((resolve, reject) => {
+                Vue.http.get('api/config')
+                  .then(response => {
+                      context.commit('nav', response.body.menu);
+                      context.commit('clients', response.body.clients);
+                      context.commit('options', response.body.options);
+                      resolve(response.body)
+                  })
+                  .catch(e => { reject(e) })
             })
         }
     }
-})
+});
+
+export default store;

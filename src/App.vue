@@ -1,51 +1,63 @@
 <template>
   <div id="app">
-    <heading/>
-    <div class="steps">
-      <steps/>
-      <router-view/>
-    </div>
-    <cart/>
+    <transition name="page">
+      <router-view :key="$route.fullPath" />
+    </transition>
+    <footer-component></footer-component>
+    <cookie></cookie>
   </div>
 </template>
 
 <script>
   // @ is an alias to /src
-  import Cart from '@/components/Cart.vue'
-  import Steps from '@/components/Steps.vue'
-  import Heading from '@/components/Heading.vue'
+  import 'swiper/dist/css/swiper.css'
+  import FooterComponent from '@/components/footer-component';
+  import Cookie from '@/components/cookie';
 
   export default {
     name: 'app',
-    components: {
-      Cart,
-      Steps,
-      Heading
-    },
-    computed: {
-      dico(){
-        return this.$store.getters.dico();
+    data(){
+      return{
+        title: 'Alaska',
+        background: 'white'
       }
-    }
+    },
+    components:{Sidebar, FooterComponent, Cookie}
   }
 </script>
 
 
 <style lang="scss">
 
-  //@import '../node_modules/vue-form-generator/dist/vfg.css';
-
   @import '../node_modules/@metabolism/framework/scss/reset';
-  @import '../node_modules/@metabolism/framework/scss/data-attribute/grid';
-
   @import '../node_modules/@metabolism/framework/vuejs/reset';
 
+  @import 'environment';
+  @import '../node_modules/@metabolism/framework/vuejs/on-scroll/style';
+
+  @import url('https://fonts.googleapis.com/css?family=Cormorant:400,500,700|Nunito+Sans:300,400,600&display=swap');
+
+  html{
+    font-size: 10px;
+    @include scrollbar(8px, #666, #e2e4eb, 0);
+    @media #{$to-small}{ font-size: 9px }
+    @media #{$to-phone}{ font-size: 8px }
+    @media #{$from-large}{ font-size: 11px }
+    @media #{$from-4k}{ font-size: 12px }
+  }
+
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Arial, sans-serif; font-size: $fz-text;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: $c-main;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+
+    @media #{$to-tablet}{ width: 100%; height: 100%; overflow: hidden }
+    @media #{$to-small}{ font-size: #{$fz-text - 1px}; }
+    @media #{$to-phone}{ letter-spacing: 0.04em }
   }
 
   .steps{

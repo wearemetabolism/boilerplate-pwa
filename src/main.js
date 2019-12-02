@@ -15,6 +15,7 @@ Vue.http.options.root = process.env.VUE_APP_API_ENDPOINT;
 
 import VueFormGenerator from 'vue-form-generator'
 Vue.use(VueFormGenerator);
+Vue.mixin(Dictionary);
 
 import BrowserDetect from '../node_modules/@metabolism/framework/browser'
 BrowserDetect();
